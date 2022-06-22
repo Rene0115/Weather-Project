@@ -11,7 +11,7 @@ app.get("/", function(req, res){
   res.sendFile(__dirname + "/index.html");
 });
 
-app.post("/", function(req, res)){
+app.post("/", function(req, res){
   console.log(req.body.cityName);
    const query = "London";
   const apiKey = "690c09bd3b51457e02d419b1ed0e072d";
@@ -21,7 +21,7 @@ app.post("/", function(req, res)){
   https.get(url, function(response){
     console.log(response.statusCode);
 
-    response.on("data", function(data)){
+    response.on("data", function(data){
       const weatherData = JSON.parse(data)
       const weatherDescription = weatherData.weather[0].description;
       const temp = weatherData.main.temp
@@ -31,11 +31,9 @@ app.post("/", function(req, res)){
       res.write("The weather is currently " + weatherDescription + ". ") 
       res.write("<img src=" + weatherIconUrl + ">")
       res.send();    
-    }
-  
-});
-
-
+    })
+  })
+})
 
 
 
